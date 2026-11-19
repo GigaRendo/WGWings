@@ -25,6 +25,7 @@ public abstract class AvatarRendererMixin {
             extra.wingtweaks$setOffhandPaper(entity.getOffhandItem().is(Items.PAPER));
             // offhand is the opposite arm of the main arm
             extra.wingtweaks$setOffhandLeft(entity.getMainArm() == HumanoidArm.RIGHT);
+            extra.wingtweaks$setCrouching(entity.isCrouching());
         }
     }
 }
