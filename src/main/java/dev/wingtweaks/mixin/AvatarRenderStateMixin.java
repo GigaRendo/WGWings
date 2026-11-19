@@ -13,6 +13,8 @@ public abstract class AvatarRenderStateMixin implements WingTweaksRenderState {
     private boolean wingtweaks$offhandPaper;
     @Unique
     private boolean wingtweaks$offhandLeft;
+    @Unique
+    private boolean wingtweaks$crouching;
 
     @Override
     public boolean wingtweaks$isLocal() {
@@ -42,5 +44,15 @@ public abstract class AvatarRenderStateMixin implements WingTweaksRenderState {
     @Override
     public void wingtweaks$setOffhandLeft(boolean value) {
         this.wingtweaks$offhandLeft = value;
+    }
+
+    @Override
+    public boolean wingtweaks$isCrouching() {
+        return this.wingtweaks$crouching;
+    }
+
+    @Override
+    public void wingtweaks$setCrouching(boolean value) {
+        this.wingtweaks$crouching = value;
     }
 }
