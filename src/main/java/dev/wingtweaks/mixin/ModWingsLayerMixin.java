@@ -24,6 +24,10 @@ public abstract class ModWingsLayerMixin {
     )
     private void wingtweaks$hideOwnWings(PoseStack poseStack, SubmitNodeCollector collector, int lightCoords,
                                          AvatarRenderState state, float yRot, float xRot, CallbackInfo callback) {
+        if (!WingTweaksConfig.allWingsVisible) {
+            callback.cancel();
+            return;
+        }
         if (!WingTweaksConfig.ownWingsVisible
                 && state instanceof WingTweaksRenderState extra
                 && extra.wingtweaks$isLocal()) {
