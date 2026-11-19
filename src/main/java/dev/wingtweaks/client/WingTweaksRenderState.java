@@ -16,4 +16,8 @@ public interface WingTweaksRenderState {
     boolean wingtweaks$isOffhandLeft();
 
     void wingtweaks$setOffhandLeft(boolean value);
+
+    boolean wingtweaks$isCrouching();
+
+    void wingtweaks$setCrouching(boolean value);
 }
