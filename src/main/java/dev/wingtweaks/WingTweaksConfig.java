@@ -16,6 +16,9 @@ public final class WingTweaksConfig {
     /** /wg wings on|off. Only affects YOUR wings on YOUR screen. */
     public static boolean ownWingsVisible = true;
 
+    /** /wg wings all on|off. Hides or shows EVERYONE's Fantastic Wings (including yours) on your screen. */
+    public static boolean allWingsVisible = true;
+
     /** Master switch for the paper fix. */
     public static boolean paperFixEnabled = true;
 
@@ -60,6 +63,7 @@ public final class WingTweaksConfig {
             return;
         }
         ownWingsVisible = Boolean.parseBoolean(p.getProperty("own_wings_visible", "true"));
+        allWingsVisible = Boolean.parseBoolean(p.getProperty("all_wings_visible", "true"));
         paperFixEnabled = Boolean.parseBoolean(p.getProperty("paper_fix", "true"));
         paperAlwaysLock = Boolean.parseBoolean(p.getProperty("paper_always_lock", "true"));
         paperArmXDeg = parse(p.getProperty("paper_arm_x_deg"), paperArmXDeg);
@@ -71,6 +75,7 @@ public final class WingTweaksConfig {
     public static void save() {
         Properties p = new Properties();
         p.setProperty("own_wings_visible", Boolean.toString(ownWingsVisible));
+        p.setProperty("all_wings_visible", Boolean.toString(allWingsVisible));
         p.setProperty("paper_fix", Boolean.toString(paperFixEnabled));
         p.setProperty("paper_always_lock", Boolean.toString(paperAlwaysLock));
         p.setProperty("paper_arm_x_deg", Float.toString(paperArmXDeg));
