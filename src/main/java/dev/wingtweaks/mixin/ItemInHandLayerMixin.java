@@ -48,6 +48,10 @@ public abstract class ItemInHandLayerMixin {
         }
 
         float factor = WingTweaksClient.tiltFactor(poseStack);
+        if (WingTweaksConfig.paperAlwaysLock && !extra.wingtweaks$isCrouching()) {
+            // always use the standing position, no matter what the body/arm is doing (falling, landing, walking)
+            factor = 1.0F;
+        }
         if (factor <= 0.0F) {
             return;
         }
