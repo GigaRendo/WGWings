@@ -30,7 +30,21 @@ public class WingTweaksClient implements ClientModInitializer {
                         .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("on")
                                 .executes(ctx -> setWings(ctx.getSource(), true)))
                         .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("off")
-                                .executes(ctx -> setWings(ctx.getSource(), false))));
+                                .executes(ctx -> setWings(ctx.getSource(), false)))
+                        .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("all")
+                                .executes(ctx -> setAllWings(ctx.getSource(), !WingTweaksConfig.allWingsVisible))
+                                .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("on")
+                                        .executes(ctx -> setAllWings(ctx.getSource(), true)))
+                                .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("off")
+                                        .executes(ctx -> setAllWings(ctx.getSource(), false)))));
+    }
+
+    private static int setAllWings(FabricClientCommandSource source, boolean visible) {
+        WingTweaksConfig.allWingsVisible = visible;
+        WingTweaksConfig.save();
+        source.sendFeedback(Component.literal(
+                visible ? "Everyone's Fantastic Wings are now visible." : "Everyone's Fantastic Wings are now hidden."));
+        return 1;
     }
 
     private static int setWings(FabricClientCommandSource source, boolean visible) {
