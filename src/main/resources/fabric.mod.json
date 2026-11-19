@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "id": "wingtweaks",
+  "version": "${version}",
+  "name": "Wing Tweaks",
+  "description": "Client-side add-on for Fantastic Wings: /wg wings on|off toggle for your own wings, and keeps offhand paper cosmetic wings on your back while your body is tilted (flying, elytra, swimming, crawling).",
+  "authors": [],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.wingtweaks.WingTweaksClient"]
+  },
+  "mixins": ["wingtweaks.mixins.json"],
+  "depends": {
+    "minecraft": "~26.3-",
+    "fabricloader": ">=0.20.0",
+    "fabric-api": "*",
+    "fantasticwings": "*",
+    "java": ">=25"
+  }
+}
