@@ -15,18 +15,22 @@ public class WingTweaksClient implements ClientModInitializer {
     public void onInitializeClient() {
         WingTweaksConfig.load();
 
-        // /wg wings        -> toggle
-        // /wg wings on     -> show your wings
-        // /wg wings off    -> hide your wings
-        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) ->
-                dispatcher.register(
-                        LiteralArgumentBuilder.<FabricClientCommandSource>literal("wg")
-                                .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("wings")
-                                        .executes(ctx -> setWings(ctx.getSource(), !WingTweaksConfig.ownWingsVisible))
-                                        .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("on")
-                                                .executes(ctx -> setWings(ctx.getSource(), true)))
-                                        .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("off")
-                                                .executes(ctx -> setWings(ctx.getSource(), false))))));
+        // /wg wings [on|off]  (and the same under /wingtweaks, in case the server's own /wg tree
+        // stops the chat box from highlighting the client-side /wg wings)
+        ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+            dispatcher.register(root("wg"));
+            dispatcher.register(root("wingtweaks"));
+        });
+    }
+
+    private static LiteralArgumentBuilder<FabricClientCommandSource> root(String name) {
+        return LiteralArgumentBuilder.<FabricClientCommandSource>literal(name)
+                .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("wings")
+                        .executes(ctx -> setWings(ctx.getSource(), !WingTweaksConfig.ownWingsVisible))
+                        .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("on")
+                                .executes(ctx -> setWings(ctx.getSource(), true)))
+                        .then(LiteralArgumentBuilder.<FabricClientCommandSource>literal("off")
+                                .executes(ctx -> setWings(ctx.getSource(), false))));
     }
 
     private static int setWings(FabricClientCommandSource source, boolean visible) {
